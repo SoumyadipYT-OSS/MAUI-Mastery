@@ -62,10 +62,22 @@ jobs:
         echo "Listing all files in the repository..."
         ls -R
 
-    - name: Debug List Project Files
+    - name: Restore Dependencies for All Projects
       run: |
-        echo "Searching for .csproj files..."
-        find . -type f -name "*.csproj" || echo "No .csproj files found in the repository."
+        set -e
+        for project in $(find . -type f -name "*.csproj"); do
+          echo "Restoring dependencies for $project"
+          dotnet restore "$project" || exit 1
+        done
+
+    - name: Build All Projects
+      run: |
+        set -e
+        for project in $(find . -type f -name "*.csproj"); do
+          echo "Building $project"
+          dotnet build "$project" --configuration Debug || exit 1
+        done
+        
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
