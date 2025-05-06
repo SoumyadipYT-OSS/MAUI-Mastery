@@ -64,9 +64,22 @@ jobs:
 
     - name: Install .NET MAUI Workloads
       run: |
-        for project in $(find . -name "*.csproj"); do
-          echo "Restoring workloads for $project"
-          dotnet workload restore --project "$project"
+        dotnet workload install maui
+        dotnet workload install android
+        dotnet workload install ios
+
+    - name: Restore Dependencies all solutions
+      run: |
+        for solution in $(find . -name "*.sln"); do
+          echo "Restoring dependencies for $solution"
+          dotnet restore "$solution"
+        done
+
+    - name: Build All Projects
+      run: |
+        for solution in $(find . -name "*.sln"); do
+          echo "Building $solution"
+          dotnet build "$solution" --configuration Debug
         done
       
 
