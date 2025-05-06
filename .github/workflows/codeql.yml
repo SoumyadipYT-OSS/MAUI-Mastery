@@ -57,9 +57,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Debug List Project Files
+      run: |
+        echo "Listing all .csproj files..."
+        find . -name "*.csproj"
+
     - name: Install .NET MAUI Workloads
       run: |
-        dotnet workload restore
+        for project in $(find . -name "*.csproj"); do
+          echo "Restoring workloads for $project"
+          dotnet workload restore --project "$project"
+        done
       
 
     # Add any setup steps before running the `github/codeql-action/init` action.
