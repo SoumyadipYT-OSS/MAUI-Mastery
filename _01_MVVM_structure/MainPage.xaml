@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ex="clr-namespace:_01_MVVM_structure.Examples"
+             x:Class="_01_MVVM_structure.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="5" Spacing="2">
+            <Button Clicked="OnBasicMvvM_Clicked" Text="Basic MVVM"
+                    MaximumHeightRequest="80" MaximumWidthRequest="200" />
+            <Button Clicked="OnSimpleMvvM_Clicked" Text="Simple MVVM"
+                    MaximumHeightRequest="88" MaximumWidthRequest="200" />
+            <Button Clicked="OnCustomMvvM_Clicked" Text="Custom MVVM"
+                    MaximumHeightRequest="88" MaximumWidthRequest="200" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

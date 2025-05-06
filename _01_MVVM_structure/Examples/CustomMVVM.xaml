@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:_01_MVVM_structure.ViewModels"
+             x:DataType="vm:TaskViewModel"
+             x:Class="_01_MVVM_structure.Examples.CustomMVVM"
+             Title="Task Manager">
+
+    <Grid RowDefinitions="Auto,*,Auto" 
+          ColumnDefinitions="*,Auto"
+          Padding="20">
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" Spacing="5" Margin="0,0,0,15">
+            <Label Text="Task Manager" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label Text="{Binding Stats}" FontSize="14" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- Task List -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" 
+                Stroke="LightGray"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 8">
+            <CollectionView ItemsSource="{Binding Tasks}" 
+                            EmptyView="No tasks available. Add one below!"
+                            Margin="5">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TaskItem">
+                        <Grid ColumnDefinitions="Auto,*,Auto" Padding="5">
+                            <CheckBox IsChecked="{Binding IsCompleted}" 
+                                      VerticalOptions="Center" 
+                                      CheckedChanged="OnTaskCompletedChanged"/>
+
+                            <Label Grid.Column="1" 
+                                   Text="{Binding Title}" 
+                                   VerticalOptions="Center"
+                                   TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToStrikethroughConverter}}"/>
+
+                            <Button Grid.Column="2" 
+                                    Text="Delete" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=DeleteTaskCommand}"
+                                    CommandParameter="{Binding .}"
+                                    WidthRequest="80"
+                                    HeightRequest="40"
+                                    FontSize="12"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+
+        <!-- Add Task Section -->
+        <Entry Grid.Row="2" 
+               Placeholder="Enter new task..." 
+               Text="{Binding NewTaskTitle}"
+               Margin="0,15,10,0"/>
+
+        <Button Grid.Row="2" 
+                Grid.Column="1" 
+                Text="Add" 
+                Command="{Binding AddTaskCommand}"
+                Margin="0,15,0,0"/>
+
+    </Grid>
+
+    <!-- Resources -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:BoolToStrikethroughConverter x:Key="BoolToStrikethroughConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+</ContentPage>

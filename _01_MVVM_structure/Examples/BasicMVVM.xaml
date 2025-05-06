@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:_01_MVVM_structure.ViewModels"
+             x:Class="_01_MVVM_structure.Examples.BasicMVVM"
+             x:DataType="vm:ClockViewModel"
+             Title="BasicMVVM">
+
+    <VerticalStackLayout Spacing="25" Padding="30,0"
+                         HorizontalOptions="Center" VerticalOptions="Center">
+        <Label Text="{Binding DateTimeBindView.Year, StringFormat='The year is {0}'}" />
+        <Label Text="{Binding DateTimeBindView, StringFormat='The month is {0:MMMM}'}" />
+        <Label Text="{Binding DateTimeBindView.Day, StringFormat='The date is {0}'}" />
+        <Label Text="{Binding DateTimeBindView, StringFormat='The time is {0:T}'}" />
+    </VerticalStackLayout>
+</ContentPage>

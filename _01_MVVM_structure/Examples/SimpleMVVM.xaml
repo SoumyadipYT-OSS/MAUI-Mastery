@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:_01_MVVM_structure.ViewModels"
+             x:DataType="vm:DateTimeViewModel"
+             x:Class="_01_MVVM_structure.Examples.SimpleMVVM"
+             Title="SimpleMVVM">
+
+    <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
+        <Label Text="MVVM Date &amp; Time Example: " 
+               FontSize="Large" HorizontalOptions="Center" />
+
+        <Label Text="{Binding CurrentDateTime, StringFormat='Current Date: {0:dddd, MMMM d, yyyy}'}" FontSize="Medium" />
+        <Label Text="{Binding CurrentDateTime, StringFormat='Current Time: {0:hh:mm:ss tt}'}" FontSize="Medium" />
+
+        <Button Text="Refresh Time" Command="{Binding RefreshTimeCommand}" HorizontalOptions="Center" />
+
+        <Border StrokeShape="RoundRectangle 8"
+                Stroke="LightGray" StrokeThickness="1" 
+                Padding="10" Margin="0,20,0,0">
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Date Adjustment" FontAttributes="Bold" />
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button Text="-1 Day" Command="{Binding AddDaysCommand}" CommandParameter="-1" />
+                    <Button Text="+1 Day" Command="{Binding AddDaysCommand}" CommandParameter="1" />
+                </HorizontalStackLayout>
+
+                <Label Text="{Binding AdjustedDateTime, StringFormat='Adjusted Date: {0:dddd, MMMM d, yyyy}'}" HorizontalOptions="Center" />
+                <Label Text="{Binding DaysDifference, StringFormat='Difference: {0} days'}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
