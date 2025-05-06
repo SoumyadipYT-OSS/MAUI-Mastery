@@ -57,10 +57,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Debug Repository Structure
+      run: |
+        echo "Listing all files in the repository..."
+        ls -R
+
     - name: Debug List Project Files
       run: |
-        echo "Listing all .csproj files..."
-        find . -name "*.csproj"
+        echo "Searching for .csproj files..."
+        find . -type f -name "*.csproj" || echo "No .csproj files found in the repository."
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
