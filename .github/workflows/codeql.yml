@@ -63,6 +63,7 @@ jobs:
         ls -R
 
     - name: Restore Dependencies all Projects
+      shell: bash
       run: |
         set -e
         for project in $(find . -type f -name "*.csproj"); do
