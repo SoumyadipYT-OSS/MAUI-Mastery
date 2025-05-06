@@ -22,7 +22,7 @@ on:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    # Choose the appropriate runner based on the language
+    # Use appropriate runner based on language
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || (matrix.language == 'csharp' && 'windows-latest') || 'ubuntu-latest' }}
     permissions:
       security-events: write
@@ -37,23 +37,26 @@ jobs:
             build-mode: autobuild
 
     steps:
-      # Checkout the repository
+      # Checkout your repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Debug step to display the repository structure
-      - name: Debug Repository Structure
-        run: |
-          echo "Listing all files in the repository..."
-          ls -R
-
-      # Setup the correct .NET SDK
+      # Setup the desired .NET SDK version
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      # Install MAUI and other necessary workloads
+      # Cache NuGet packages to avoid re-downloading dependencies
+      - name: Cache NuGet Packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      # Install required .NET MAUI workloads
       - name: Install .NET MAUI Workloads
         run: |
           dotnet workload update
@@ -61,45 +64,7 @@ jobs:
           dotnet workload install android
           dotnet workload install ios
 
-      # Restore dependencies for each .csproj file
-      - name: Restore Dependencies for .csproj Projects
-        shell: bash
-        run: |
-          set -e
-          for project in $(find . -type f -name "*.csproj"); do
-            echo "Restoring dependencies for $project"
-            dotnet restore "$project" || exit 1
-          done
-
-      # Build each .csproj file
-      - name: Build .csproj Projects
-        shell: bash
-        run: |
-          set -e
-          for project in $(find . -type f -name "*.csproj"); do
-            echo "Building $project"
-            dotnet build "$project" --configuration Debug || exit 1
-          done
-
-      # Restore dependencies for each solution file (.sln)
-      - name: Restore Dependencies for Solutions
-        shell: bash
-        run: |
-          for solution in $(find . -type f -name "*.sln"); do
-            echo "Restoring dependencies for $solution"
-            dotnet restore "$solution"
-          done
-
-      # Build each solution file
-      - name: Build Solutions
-        shell: bash
-        run: |
-          for solution in $(find . -type f -name "*.sln"); do
-            echo "Building $solution"
-            dotnet build "$solution" --configuration Debug
-          done
-
-      # Initialize CodeQL
+      # Initialize CodeQL (autobuild mode will run the build)
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -107,17 +72,7 @@ jobs:
           build-mode: ${{ matrix.build-mode }}
           queries: security-extended,security-and-quality
 
-      # Optional manual build step if manual mode is used
-      - name: Manual Build (if required)
-        if: matrix.build-mode == 'manual'
-        shell: bash
-        run: |
-          echo 'Using manual build mode for CodeQL analysis...'
-          dotnet restore
-          dotnet build --configuration Release
-          dotnet test --configuration Release
-
-      # Perform the CodeQL analysis
+      # Run CodeQL analysis
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
