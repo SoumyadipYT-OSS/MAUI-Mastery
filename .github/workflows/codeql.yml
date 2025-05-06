@@ -62,8 +62,14 @@ jobs:
         echo "Listing all .csproj files..."
         find . -name "*.csproj"
 
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
     - name: Install .NET MAUI Workloads
       run: |
+        dotnet workload update
         dotnet workload install maui
         dotnet workload install android
         dotnet workload install ios
