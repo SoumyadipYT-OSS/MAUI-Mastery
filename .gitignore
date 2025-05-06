@@ -1,0 +1,69 @@
+# Ignore build files
+bin/
+obj/
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+*.app
+*.ipa
+
+# Ignore user-specific settings
+.vs/
+.idea/
+*.suo
+*.user
+*.userprefs
+*.config
+*.log
+
+# Ignore compiled output
+*.mdb
+*.cache
+*.csproj.user
+
+# Ignore dependency caches
+**/node_modules/
+**/packages/
+**/project.lock.json
+**/package-lock.json
+
+# Ignore macOS system files
+.DS_Store
+*.DS_Store
+
+# Ignore Visual Studio & JetBrains Rider settings
+*.ncrunchsolution
+*.ncrunchproject
+*.vsconfig
+
+# Ignore Android/iOS build artifacts
+android/
+ios/
+*.apk
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdatad/
+*.gradle
+*.keystore
+
+# Ignore MAUI-specific files
+.maui
+.platforms/
+Resources/
+
+# Ignore secrets & environment files
+.env
+*.key
+*.pem
+*.cert
+
+# Ignore test & coverage files
+TestResults/
+*.coverage
+coverage/
+
+# Ignore temporary files
+Thumbs.db
+desktop.ini
