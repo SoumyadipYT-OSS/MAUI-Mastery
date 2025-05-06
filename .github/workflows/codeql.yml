@@ -62,7 +62,7 @@ jobs:
         echo "Listing all files in the repository..."
         ls -R
 
-    - name: Restore Dependencies for All Projects
+    - name: Restore Dependencies all Projects
       run: |
         set -e
         for project in $(find . -type f -name "*.csproj"); do
