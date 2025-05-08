@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_02_DependencyInjection.Views.Simple"
+             Title="Simple">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="Weather Forecast" FontSize="Large" HorizontalOptions="Center" />
+            <Label x:Name="DateTimeLabel" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" VerticalOptions="Center" Spacing="20">
+            <Label x:Name="TemperatureLabel" FontSize="Medium" HorizontalOptions="Center" />
+            <Label x:Name="WeatherConditionLabel" FontSize="Small" HorizontalOptions="Center" />
+            <Label x:Name="LocationLabel" FontSize="Small" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <Button Grid.Row="2" x:Name="RefreshButton" Text="Refresh Forecast" 
+                Clicked="OnRefreshClicked" HorizontalOptions="Center" />
+    </Grid>
+    
+</ContentPage>

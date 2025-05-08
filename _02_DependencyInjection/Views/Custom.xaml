@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_02_DependencyInjection.Views.Custom"
+             xmlns:model="clr-namespace:_02_DependencyInjection.Models"
+             x:DataType="model:CoffeePackage"
+             Title="Custom">
+
+    <!-- Full-page gradient background -->
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#3E2723" Offset="0.0"/>
+            <!-- Deep Coffee Brown -->
+            <GradientStop Color="#8B4513" Offset="1.0"/>
+            <!-- Rich Chestnut -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="25">
+
+            <!-- Title -->
+            <Label Text="☕ Premium Coffee Selection"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="White"
+                   Margin="0,0,0,25"/>
+
+            <!-- Coffee Packages ListView -->
+            <CollectionView x:Name="CoffeePackagesView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="DarkGoldenrod"
+                                StrokeThickness="2"
+                                Padding="18">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="18"/>
+                            </Border.StrokeShape>
+
+                            <Border.Shadow>
+                                <Shadow Offset="6,6" Opacity="0.5"/>
+                            </Border.Shadow>
+
+                            <!-- Elegant Gradient Background -->
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#5C3F2E" Offset="0.0"/>
+                                    <!-- Coffee Deep Brown -->
+                                    <GradientStop Color="#A0522D" Offset="1.0"/>
+                                    <!-- Burnt Sienna -->
+                                </LinearGradientBrush>
+                            </Border.Background>
+
+                            <Grid ColumnSpacing="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Coffee Image (Uniform size, rounded edges) -->
+                                <Border Stroke="Transparent"
+                                        StrokeThickness="0"
+                                        Padding="5"
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="100"
+                                        WidthRequest="100"
+                                        Grid.RowSpan="5">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="15"/>
+                                    </Border.StrokeShape>
+                                    <Image Source="{Binding ImageUrl}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="100"
+                                           WidthRequest="100"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                </Border>
+
+                                <!-- Coffee Name & Description -->
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label Text="{Binding Name}"
+                                           FontSize="22"
+                                           FontAttributes="Bold"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Description}"
+                                           FontSize="16"
+                                           TextColor="FloralWhite"
+                                           LineBreakMode="WordWrap"/>
+                                </VerticalStackLayout>
+
+                                <!-- Quantity -->
+                                <HorizontalStackLayout Grid.Column="1" Grid.Row="1" Spacing="10">
+                                    <Label Text="Quantity:" FontAttributes="Bold" TextColor="White"/>
+                                    <Label Text="{Binding Quantity, StringFormat='{0} mg'}" TextColor="FloralWhite"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Price -->
+                                <HorizontalStackLayout Grid.Column="1" Grid.Row="2" Spacing="10">
+                                    <Label Text="Price:" FontAttributes="Bold" TextColor="White"/>
+                                    <Label Text="{Binding Price, StringFormat='₹ {0}'}" TextColor="Gold"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Rating -->
+                                <HorizontalStackLayout Grid.Column="1" Grid.Row="3" Spacing="10">
+                                    <Label Text="Rating:" FontAttributes="Bold" TextColor="White"/>
+                                    <Label Text="{Binding Rating, StringFormat='{0:F1}/5.0'}" TextColor="PaleGoldenrod"/>
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
