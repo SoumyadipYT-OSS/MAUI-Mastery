@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:_03_SOLID_Principles.Model"
+             x:Class="_03_SOLID_Principles.Views.BasicSOLID"
+             x:DataType="model:WeatherData"
+             Title="SOLID Principles Demo">
+
+    <VerticalStackLayout Spacing="20" Padding="20">
+        <Label Text="Weather Service Demo" 
+               FontSize="24" 
+               HorizontalOptions="Center"/>
+
+        <Border StrokeShape="RoundRectangle 10,10,10,10"
+                Stroke="LightGray"
+                Padding="20">
+            <VerticalStackLayout>
+                <Label Text="Current Weather" 
+                       FontSize="18" 
+                       Margin="0,0,0,10"/>
+
+                <Label x:Name="LocationLabel" 
+                       Text="Location: Loading..." />
+
+                <Label x:Name="TemperatureLabel" 
+                       Text="Temperature: --" />
+
+                <Label x:Name="ConditionLabel" 
+                       Text="Condition: --" />
+            </VerticalStackLayout>
+        </Border>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+            <Button x:Name="LoadWeatherButton" 
+                    Text="Load Weather" 
+                    Clicked="OnLoadWeatherClicked"/>
+
+            <Button x:Name="SwitchProviderButton" 
+                    Text="Switch Provider" 
+                    Clicked="OnSwitchProviderClicked"/>
+        </HorizontalStackLayout>
+
+        <ScrollView>
+            <VerticalStackLayout Padding="10" Spacing="10">
+                <Label Text="SOLID Principles Demonstrated:" 
+                       FontSize="16" 
+                       FontAttributes="Bold"/>
+
+                <Label Text="• Single Responsibility: Each class has one focused purpose" 
+                       TextType="Html"/>
+
+                <Label Text="• Open/Closed: Weather providers can be added without modifying existing code" 
+                       TextType="Html"/>
+
+                <Label Text="• Liskov Substitution: Different weather providers can be substituted seamlessly" 
+                       TextType="Html"/>
+
+                <Label Text="• Interface Segregation: Clients only depend on methods they need" 
+                       TextType="Html"/>
+
+                <Label Text="• Dependency Inversion: High-level modules depend on abstractions" 
+                       TextType="Html"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>
+    

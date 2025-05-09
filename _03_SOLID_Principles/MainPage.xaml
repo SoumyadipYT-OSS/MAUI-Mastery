@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:_03_SOLID_Principles.Model"
+             x:Class="_03_SOLID_Principles.MainPage"
+             x:DataType="model:WeatherData"
+             Title="SOLID Principles Demo">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <Label Text="SOLID Principles Demonstrations"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,10"/>
+
+            <Border StrokeThickness="1"
+                   Stroke="{AppThemeBinding Light=#E0E0E0, Dark=#404040}"
+                   StrokeShape="RoundRectangle 10"
+                   Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Weather Service Example"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
+
+                    <Label Text="This example demonstrates all SOLID principles through a weather service implementation:"
+                           Margin="0,0,0,10"/>
+
+                    <Label Text="• Single Responsibility Principle" FontAttributes="Bold"/>
+                    <Label Text="Each class has a single, well-defined responsibility" 
+                           Margin="15,0,0,5"/>
+
+                    <Label Text="• Open/Closed Principle" FontAttributes="Bold"/>
+                    <Label Text="The system is extendable without modifying existing code"
+                           Margin="15,0,0,5"/>
+
+                    <Label Text="• Liskov Substitution Principle" FontAttributes="Bold"/>
+                    <Label Text="Different weather providers can be swapped seamlessly"
+                           Margin="15,0,0,5"/>
+
+                    <Label Text="• Interface Segregation Principle" FontAttributes="Bold"/>
+                    <Label Text="Interfaces are focused and clients only depend on what they need"
+                           Margin="15,0,0,5"/>
+
+                    <Label Text="• Dependency Inversion Principle" FontAttributes="Bold"/>
+                    <Label Text="High-level modules depend on abstractions, not implementations"
+                           Margin="15,0,0,5"/>
+
+                    <Button Text="Open Weather Service Demo" 
+                            Clicked="OnBasicSOLIDClicked"
+                            HorizontalOptions="Center"
+                            Margin="0,10,0,0"
+                            BackgroundColor="{AppThemeBinding Light=#007AFF, Dark=#0A84FF}"
+                            TextColor="White"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Placeholder for future examples -->
+            <Label Text="More examples coming soon..." 
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0"
+                   TextColor="Gray"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
